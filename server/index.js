@@ -11,9 +11,7 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-
-const corsMid = cors({ origin: "http://localhost:3000", credentials: true});
-app.use(corsMid);
+const PORT = process.env.PORT || 8080;
 
 const sessionMid = session({
     key: process.env.SESSION_KEY,
@@ -21,7 +19,7 @@ const sessionMid = session({
     name: "cart.sid",
     saveUninitialized: true,
     resave: true,
-    store: new MongoStore({ url: "mongodb://localhost/shopcart" }),
+    store: new MongoStore({ url: `mongodb://${process.env.MONGO_ADDRESS}/shopcart` }),
     cookie: {
         maxAge: 84600000,
         rolling: true
@@ -37,4 +35,4 @@ app.get('/*', async (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-app.listen(8000, () => { console.log("Listening on 8000"); });
+app.listen(PORT, () => { console.log(`Listening on ${PORT}`); });

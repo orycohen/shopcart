@@ -5,7 +5,7 @@ const db = mongo.createConnection();
 
 (async () => {
     try {
-        await db.openUri('mongodb://localhost/shopcart', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+        await db.openUri(`mongodb://${process.env.MONGO_ADDRESS}/shopcart`, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
     } catch (error) {
         debug(`Error connecting to DB ${error}`);
     }
