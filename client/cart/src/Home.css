@@ -1,0 +1,5 @@
+.ver-center {
+    display: flex;
+    direction: column;
+    align-items: center;
+}
